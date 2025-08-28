@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://peelncraft-website-server.onrender.com'
+  baseURL: 'https://peelncraft-website-server.onrender.com/api'
 });
 
 // Attach token if present
