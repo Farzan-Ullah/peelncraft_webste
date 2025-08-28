@@ -128,7 +128,7 @@ export default function AdminDashboard() {
               >
                 <img
                   className="w-16 h-16 object-cover rounded"
-                  src={`/api/products/${p._id}/image/0`}
+                  src={`/products/${p._id}/image/0`}
                 />
                 <div className="flex-1">
                   <div className="font-bold">{p.title}</div>
