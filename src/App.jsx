@@ -210,6 +210,7 @@ const Home = () => {
           </button>
         </div>
         {/* Mobile Menu */}
+        
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -225,6 +226,7 @@ const Home = () => {
               <a href="#contact" className="block hover:text-green-600">
                 Contact
               </a>
+
               {!user ? (
                 <button
                   onClick={() => {
@@ -236,17 +238,46 @@ const Home = () => {
                   Login
                 </button>
               ) : (
-                <button
-                  onClick={() => {
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                    location.reload();
-                  }}
-                  className="block w-full text-left hover:text-green-600"
-                >
-                  Logout
-                </button>
+                <>
+                  {/* Profile Icon for mobile */}
+                  <div className="relative">
+                    <button
+                      onClick={() => setProfileOpen(!profileOpen)}
+                      className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300"
+                    >
+                      👤
+                    </button>
+                    {profileOpen && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white border rounded-xl shadow-lg p-3 z-20">
+                        <div className="px-2 py-1 font-bold border-b mb-2">
+                          {user.name}
+                        </div>
+                        {user.isAdmin && (
+                          <Link
+                            to="/admin"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block px-2 py-1 hover:bg-gray-100 rounded"
+                          >
+                            Admin Panel
+                          </Link>
+                        )}
+                        <button
+                          onClick={() => {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("user");
+                            location.reload();
+                          }}
+                          className="block w-full text-left px-2 py-1 hover:bg-gray-100 rounded"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </>
               )}
+
               <button
                 onClick={() => {
                   setCartOpen(true);
