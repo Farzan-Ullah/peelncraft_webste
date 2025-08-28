@@ -7,13 +7,14 @@ import AdminDashboard from "./components/AdminDashboard.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { Typewriter } from "react-simple-typewriter";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const ProductCard = ({ product, onOpen }) => (
   <div className="bg-white rounded-2xl shadow hover:-translate-y-1 transition p-4">
     <div className="aspect-[4/3] bg-gray-100 rounded-xl mb-3 overflow-hidden flex items-center justify-center">
       <img
         className="w-full h-full object-cover"
-        src={`/api/products/${product._id}/image/0`}
+        src={`https://peelncraft-website-server.onrender.com/api/products/${product._id}/image/0`}
         alt={product.title}
         onError={(e) => {
           e.target.style.display = "none";
@@ -115,20 +116,34 @@ const Home = () => {
       {/* Header */}
       <header className="sticky top-0 bg-white border-b-4 border-green-400 z-10">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold">
-            PeelnCraft
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-green-400 rounded-full flex items-center justify-center overflow-hidden">
+              <img
+                src="https://i.pinimg.com/736x/f9/5f/03/f95f0320ffab2f75021bf899baeffebc.jpg"
+                alt="PeelnCraft Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="text-2xl font-bold text-gray-800">PeelnCraft</span>
           </Link>
           <nav className="hidden md:flex gap-6 items-center">
-            <a href="#products" className="hover:text-green-600">
+            <a
+              href="#products"
+              className="hover:text-green-600 font-semibold text-gray-600"
+            >
               Products
             </a>
-            <a href="#contact" className="hover:text-green-600">
+            <a
+              href="#contact"
+              className="hover:text-green-600 font-semibold text-gray-600"
+            >
               Contact
             </a>
             {!user ? (
               <button
                 onClick={() => setShowLogin(true)}
-                className="hover:text-green-600"
+                className="hover:text-green-600 font-semibold text-gray-600"
               >
                 Login
               </button>
@@ -178,7 +193,7 @@ const Home = () => {
               onClick={() => setCartOpen(true)}
               className="relative p-2 hover:text-green-600"
             >
-              🛒
+              <i class="fas fa-shopping-cart text-xl"></i>
               {cart.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
                   {cart.reduce((sum, i) => sum + i.quantity, 0)}
@@ -246,14 +261,10 @@ const Home = () => {
         </AnimatePresence>
       </header>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-green-400 via-green-500 to-emerald-600 text-white py-16 text-center px-4">
+      <section className="bg-gradient-to-br from-green-400 via-emerald-500 to-emerald-200 text-white py-16 text-center px-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight sm:leading-snug md:leading-normal">
           <Typewriter
-            words={[
-              "Welcome to PeelnCraft",
-              "Custom Cards",
-              "Creative Materials",
-            ]}
+            words={["Welcome to PeelnCraft"]}
             loop={0} // 0 = infinite loop
             cursor
             cursorStyle="|"
@@ -263,8 +274,19 @@ const Home = () => {
           />
         </h1>
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-90 max-w-2xl mx-auto leading-relaxed">
-          Custom cards, crafting supplies & creative materials
+          Your one-stop shop for custom cards, crafting supplies, and creative
+          materials
         </p>
+        <button
+          onClick={() =>
+            document
+              .getElementById("products")
+              .scrollIntoView({ behavior: "smooth" })
+          }
+          className="bg-white text-green-600 px-6 py-2 md:px-8 md:py-3 rounded-xl font-bold text-sm md:text-lg hover:bg-gray-100 shadow-lg mt-6"
+        >
+          Shop Now
+        </button>
       </section>
       {/* Products */}
       <section id="products" className="py-12">
@@ -300,7 +322,7 @@ const Home = () => {
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={imageIndex}
-                    src={`/api/products/${active._id}/image/${imageIndex}`}
+                    src={`https://peelncraft-website-server.onrender.com/api/products/${active._id}/image/${imageIndex}`}
                     alt={active.title}
                     className="absolute w-full h-full object-cover"
                     initial={{ x: direction === 1 ? 300 : -300, opacity: 0 }}
@@ -536,64 +558,151 @@ const Home = () => {
           </div>
         </div>
       )}
-      ;{/* Footer / Contact Section */}
-      <footer id="contact" className="bg-gray-100 py-12 mt-12">
+      ;{/* Contact Section */}
+      <section id="contact" className="bg-gray-100 py-12">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6 text-center">Get in Touch</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 p-4 gap-20">
             <div className="bg-white p-6 rounded-2xl shadow text-center transition transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="font-bold mb-2">Email</div>
+              <div className="font-bold mb-3 text-xl">
+                <div>
+                  {" "}
+                  <i className="fas fa-envelope text-red-500 text-2xl"></i>
+                </div>
+                Email
+              </div>
               <div>peelncraft@gmail.com</div>
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow text-center transition transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="font-bold mb-2">WhatsApp</div>
+              <div className="font-bold mb-2 text-xl">
+                <div>
+                  {" "}
+                  <i className="fab fa-whatsapp text-green-500 text-2xl"></i>{" "}
+                </div>
+                WhatsApp
+              </div>
               <div>+92 3355392166</div>
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow text-center transition transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="font-bold mb-2">Instagram</div>
-              <a
-                href="https://instagram.com/peelncraft.pk"
-                className="text-green-600"
-              >
-                @peelncraft.pk
-              </a>
+              <div className="font-bold mb-2 text-xl">
+                <div>
+                  {" "}
+                  <i className="fab fa-instagram text-pink-500 text-2xl"></i>
+                </div>
+                Instagram
+              </div>
+              <a href="https://instagram.com/peelncraft.pk">@peelncraft.pk</a>
             </div>
           </div>
-          <p className="text-center text-gray-500 mt-8">
-            © {new Date().getFullYear()} PeelnCraft. All rights reserved.
-          </p>
+        </div>
+      </section>
+      {/* Footer Section */}
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Brand */}
+            <div>
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                  <i className="fas fa-leaf text-white"></i>
+                </div>
+                <span className="text-xl font-bold">PeelnCraft</span>
+              </div>
+              <p className="text-gray-300">
+                Your trusted source for custom crafting materials and creative
+                supplies.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="#home"
+                    className="text-gray-300 hover:text-green-400"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#products"
+                    className="text-gray-300 hover:text-green-400"
+                  >
+                    Products
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#contact"
+                    className="text-gray-300 hover:text-green-400"
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Categories */}
+            <div>
+              <h3 className="text-lg font-bold mb-4">Categories</h3>
+              <ul className="space-y-2">
+                <li>
+                  <span className="text-gray-300">Custom Cards</span>
+                </li>
+                <li>
+                  <span className="text-gray-300">Crafting Sheets</span>
+                </li>
+                <li>
+                  <span className="text-gray-300">Brand Stickers</span>
+                </li>
+                <li>
+                  <span className="text-gray-300">Thank You Cards</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Connect */}
+            <div>
+              <h3 className="text-lg font-bold mb-4">Connect With Us</h3>
+              <div className="flex space-x-4">
+                <a
+                  href="mailto:peelncraft@gmail.com"
+                  className="text-gray-300 hover:text-green-400 text-xl"
+                >
+                  <i className="fas fa-envelope"></i>
+                </a>
+                <a
+                  href="https://wa.me/923355392166"
+                  className="text-gray-300 hover:text-green-400 text-xl"
+                >
+                  <i className="fab fa-whatsapp"></i>
+                </a>
+                <a
+                  href="https://instagram.com/peelncraft.pk"
+                  className="text-gray-300 hover:text-green-400 text-xl"
+                >
+                  <i className="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom copyright */}
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+            <p className="text-gray-300">
+              &copy; 2024 PeelnCraft.pk. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
   );
 };
-
-// const Contact = () => (
-//   <div className="max-w-4xl mx-auto px-4 py-12">
-//     <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-//     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-//       <div className="bg-white p-6 rounded-2xl shadow">
-//         <div className="font-bold mb-2">Email</div>
-//         <div>peelncraft@gmail.com</div>
-//       </div>
-//       <div className="bg-white p-6 rounded-2xl shadow">
-//         <div className="font-bold mb-2">WhatsApp</div>
-//         <div>+92 3355392166</div>
-//       </div>
-//       <div className="bg-white p-6 rounded-2xl shadow">
-//         <div className="font-bold mb-2">Instagram</div>
-//         <a
-//           href="https://instagram.com/peelncraft.pk"
-//           className="text-green-600"
-//         >
-//           @peelncraft.pk
-//         </a>
-//       </div>
-//     </div>
-//   </div>
-// );
 
 export default function App() {
   return (

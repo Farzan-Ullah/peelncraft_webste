@@ -25,7 +25,7 @@ export default function LoginModal({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-2xl w-full max-w-sm p-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-2xl font-bold">
