@@ -13,7 +13,7 @@ const ProductCard = ({ product, onOpen }) => (
     <div className="aspect-[4/3] bg-gray-100 rounded-xl mb-3 overflow-hidden flex items-center justify-center">
       <img
         className="w-full h-full object-cover"
-        src={`/api/products/${product._id}/image/0`}
+        src={`/products/${product._id}/image/0`}
         alt={product.title}
         onError={(e) => {
           e.target.style.display = "none";
@@ -300,7 +300,7 @@ const Home = () => {
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={imageIndex}
-                    src={`/api/products/${active._id}/image/${imageIndex}`}
+                    src={`/products/${active._id}/image/${imageIndex}`}
                     alt={active.title}
                     className="absolute w-full h-full object-cover"
                     initial={{ x: direction === 1 ? 300 : -300, opacity: 0 }}
